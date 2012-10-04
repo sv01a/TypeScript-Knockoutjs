@@ -2,7 +2,7 @@ TypeScript-Knockoutjs
 =====================
 
 Example:
-
+<code>
 ///<reference path='knockout.d.ts' />
 module app {
     export module models {
@@ -29,3 +29,4 @@ module app {
 }
 var viewModel = new app.viewModels.contacts;
 ko.applyBindings(viewModel);
+</code>
