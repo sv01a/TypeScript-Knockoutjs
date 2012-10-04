@@ -2,8 +2,7 @@ TypeScript-Knockoutjs
 =====================
 
 Example:
-<code>
-///<reference path='knockout.d.ts' />
+<pre>
 module app {
     export module models {
         export class contact {
@@ -29,4 +28,4 @@ module app {
 }
 var viewModel = new app.viewModels.contacts;
 ko.applyBindings(viewModel);
-</code>
+</pre>
