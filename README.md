@@ -12,7 +12,7 @@ module app {
             FullName;
             constructor () {
                 this.FullName = ko.computed(function () {
-                    return this.Name() + " " + this.Surname();
+                    return this.Name() + " " + this.SurName();
                 }, this);
             }
         }
