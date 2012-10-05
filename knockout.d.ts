@@ -19,35 +19,35 @@ module knockout {
         (options: koComputedOptions): koExtend;
         (): any;
     };
+    interface koObservableBase {
+        valueHasMutated(): void;
+        valueWillMutate(): void;
+    }
+    interface koObservableNumber extends koObservableBase {
+        (newValue: number): void;
+        (): number;
+        subscribe(callback: (newValue: number) => void ): koSubscription;
+    }
+    interface koObservableString extends koObservableBase {
+        (newValue: string): void;
+        (): string;
+        subscribe(callback: (newValue: string) => void ): koSubscription;
+    }
+    interface koObservableBool extends koObservableBase {
+        (newValue: bool): void;
+        (): bool;
+        subscribe(callback: (newValue: bool) => void ): koSubscription;
+    }
+    interface koObservableAny extends koObservableBase {
+        (newValue: any): void;
+        (): any;
+        subscribe(callback: (newValue: any) => void ): koSubscription;
+    }
     export interface koObservable {
-        (value: number): {
-            (newValue: number): void;
-            (): number;
-            subscribe(callback: (newValue: number) => void ):koSubscription;
-            valueHasMutated(): void;
-            valueWillMutate(): void;
-        };
-        (value: string): {
-            (newValue: string): void;
-            (): string;
-            subscribe(callback: (newValue: string) => void ):koSubscription;
-            valueHasMutated(): void;
-            valueWillMutate(): void;
-        };
-        (value: bool): {
-            (newValue: bool): void;
-            (): bool;
-            subscribe(callback: (newValue: bool) => void ):koSubscription;
-            valueHasMutated(): void;
-            valueWillMutate(): void;
-        };
-        (value: any): {
-            (newValue: any): void;
-            (): any;
-            subscribe(callback: (newValue: any) => void ):koSubscription;
-            valueHasMutated(): void;
-            valueWillMutate(): void;
-        };
+        (value: number): koObservableNumber;
+        (value: string): koObservableString;
+        (value: bool): koObservableBool;
+        (value: any): koObservableAny;
     };
     export interface koObservableArray {
         (array: Array): {
