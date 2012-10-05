@@ -11,9 +11,9 @@ module app {
             SurName = ko.observable('');
             FullName;
             constructor () {
-                this.FullName = ko.computed(function () {
+                this.FullName = ko.computed(()=>{
                     return this.Name() + " " + this.SurName();
-                }, this);
+                });
             }
         }
     }
