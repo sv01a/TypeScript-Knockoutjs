@@ -24,21 +24,29 @@ module knockout {
             (newValue: number): void;
             (): number;
             subscribe(callback: (newValue: number) => void ):koSubscription;
+            valueHasMutated(): void;
+            valueWillMutate(): void;
         };
         (value: string): {
             (newValue: string): void;
             (): string;
             subscribe(callback: (newValue: string) => void ):koSubscription;
+            valueHasMutated(): void;
+            valueWillMutate(): void;
         };
         (value: bool): {
             (newValue: bool): void;
             (): bool;
             subscribe(callback: (newValue: bool) => void ):koSubscription;
+            valueHasMutated(): void;
+            valueWillMutate(): void;
         };
         (value: any): {
             (newValue: any): void;
             (): any;
             subscribe(callback: (newValue: any) => void ):koSubscription;
+            valueHasMutated(): void;
+            valueWillMutate(): void;
         };
     };
     export interface koObservableArray {
