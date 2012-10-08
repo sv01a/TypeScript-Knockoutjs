@@ -78,6 +78,7 @@ module knockout {
     }
     interface koObservableArray {
         (array: Array): koObservableArrayBase;
+        (): koObservableArrayBase;
     }
 
     export function applyBindings(viewModel?, rootNode?: HTMLElement);
