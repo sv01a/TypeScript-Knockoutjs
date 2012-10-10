@@ -14,10 +14,13 @@ module knockout {
         write?: () =>void;
         owner?: any;
     }
-    interface koComputed {
+    interface koComputed extends koSubscription {
         (evaluator: () => any): koExtend;
         (options: koComputedOptions): koExtend;
         (): any;
+        subscribe(callback: (newValue: number) => void ): koSubscription;
+        getDependenciesCount(): number;
+        hasWriteFunction(): bool;
     };
     interface koObservableBase {
         valueHasMutated(): void;
@@ -87,6 +90,7 @@ module knockout {
 
     export var observable: koObservable;
     export var computed: koComputed;
+    export var dependentObservable: koComputed;
     export var observableArray: koObservableArray;
 };
 module knockout.utils {
