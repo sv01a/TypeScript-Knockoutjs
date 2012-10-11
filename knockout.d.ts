@@ -1,5 +1,5 @@
 module knockout {
-    interface koSubscription{
+    interface koSubscription {
         dispose();
     }
     interface koExtendOptions {
@@ -7,11 +7,11 @@ module knockout {
     }
     interface koExtend {
         ();
-        extend(options:koExtendOptions);
+        extend(options: koExtendOptions);
     }
     interface koComputedOptions {
         read?: () =>any;
-        write?: (value:any) =>void;
+        write?: (value: any) =>void;
         owner?: any;
     }
     interface koComputed extends koSubscription {
@@ -53,9 +53,9 @@ module knockout {
         (value: any): koObservableAny;
     }
     interface koObservableArrayBase extends koObservableBase {
-        (newValue: Array): void;
-        (): Array;
-        subscribe(callback: (newValue: Array) => void ): koSubscription;
+        (newValue: any[]): void;
+        (): any[];
+        subscribe(callback: (newValue: any[]) => void ): koSubscription;
 
         pop(): any;
         push(...items: any[]): void;
@@ -80,13 +80,13 @@ module knockout {
         replace(oldItem, newItem);
     }
     interface koObservableArray {
-        (array: Array): koObservableArrayBase;
+        (array: any[]): koObservableArrayBase;
         (): koObservableArrayBase;
     }
 
-    export function applyBindings(viewModel?, rootNode?: HTMLElement);
-    export function toJSON(viewModel, replacer?, space?):string;
-    export function toJS(viewModel): Object;
+    export function applyBindings(viewModel? , rootNode?: HTMLElement);
+    export function toJSON(viewModel, replacer? , space? ): string;
+    export function toJS(viewModel): any;
 
     export var observable: koObservable;
     export var computed: koComputed;
@@ -94,7 +94,7 @@ module knockout {
     export var observableArray: koObservableArray;
 };
 module knockout.utils {
-    export var fieldsIncludedWithJsonPost:any[];
+    export var fieldsIncludedWithJsonPost: any[];
 
     export function extend(target, source);
     export function arrayForEach(array: any[], action: (any) =>void );
@@ -102,15 +102,15 @@ module knockout.utils {
     export function arrayFirst(array: any[], predicate: (item) =>bool, predicateOwner? ): any;
     export function arrayFilter(array: any[], predicate: (item) =>bool);
     export function arrayGetDistinctValues(array: any[]);
-    export function arrayMap(array: any[], mapping:(item)=>any);
-    export function arrayPushAll(array: any[],valuesToPush: any[]);
+    export function arrayMap(array: any[], mapping: (item) =>any);
+    export function arrayPushAll(array: any[], valuesToPush: any[]);
     export function arrayRemoveItem(array: any[], itemToRemove);
     export function getFormFields(form: HTMLFormElement, fieldName: string): HTMLElement[];
-    export function parseJson(jsonString:string):Object;
+    export function parseJson(jsonString: string): any;
     export function registerEventHandler(element: HTMLElement, eventType: string, handler: (event: Event) =>void );
-    export function stringifyJson(data, replacer?, space?);
+    export function stringifyJson(data, replacer? , space? );
     export function range(min: number, max: number);
-    export function toggleDomNodeCssClass(node:HTMLElement, className:string, shouldHaveClass?:bool);
+    export function toggleDomNodeCssClass(node: HTMLElement, className: string, shouldHaveClass?: bool);
     export function triggerEvent(element: HTMLElement, eventType: string);
     export function unwrapObservable(value);
 }
