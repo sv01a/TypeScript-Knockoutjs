@@ -22,7 +22,7 @@ module knockout {
         getDependenciesCount(): number;
         hasWriteFunction(): bool;
     };
-    interface koObservableBase {
+    interface koObservableBase extends koExtend {
         valueHasMutated(): void;
         valueWillMutate(): void;
     }
