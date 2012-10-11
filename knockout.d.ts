@@ -11,7 +11,7 @@ module knockout {
     }
     interface koComputedOptions {
         read?: () =>any;
-        write?: () =>void;
+        write?: (value:any) =>void;
         owner?: any;
     }
     interface koComputed extends koSubscription {
