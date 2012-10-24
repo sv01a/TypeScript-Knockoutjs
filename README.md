@@ -19,13 +19,40 @@ module app {
     }
     export module viewModels{
         export class contacts {
-            items= ko.observableArray([]);
+            items = ko.observableArray([]);
             addContact(){
                 this.items.push(new app.models.contact);
             };
         }
     }
 }
+
+ko.extenders.logChange = function(target, option) {
+    target.subscribe(function(newValue) {
+       console.log(option + ": " + newValue);
+    });
+    return target;
+};
+
+ko.bindingHandlers.hasFocus = {
+    init: function(element, valueAccessor) {
+        $(element).focus(function() {
+            var value = valueAccessor();
+            value(true);
+        });
+        $(element).blur(function() {
+            var value = valueAccessor();
+            value(false);
+        });           
+    },
+    update: function(element, valueAccessor) {
+        var value = valueAccessor();
+        if (ko.utils.unwrapObservable(value))
+            element.focus();
+        else
+            element.blur();
+    }
+};
 var viewModel = new app.viewModels.contacts;
 ko.applyBindings(viewModel);
 </pre>
