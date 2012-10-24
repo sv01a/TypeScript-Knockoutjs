@@ -93,6 +93,7 @@ module knockout {
     export var dependentObservable: koComputed;
     export var observableArray: koObservableArray;
     export var extenders: any;
+    export var bindingHandlers: any;
 };
 module knockout.utils {
     export var fieldsIncludedWithJsonPost: any[];
