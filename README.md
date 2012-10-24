@@ -27,7 +27,7 @@ module app {
     }
 }
 
-ko.extenders.logChange = function(target, option) {
+ko.extenders['logChange'] = (target, option)=>{
     target.subscribe(function(newValue) {
        console.log(option + ": " + newValue);
     });
@@ -35,7 +35,7 @@ ko.extenders.logChange = function(target, option) {
 };
 
 ko.bindingHandlers.hasFocus = {
-    init: function(element, valueAccessor) {
+    init: (element, valueAccessor)=>{
         $(element).focus(function() {
             var value = valueAccessor();
             value(true);
