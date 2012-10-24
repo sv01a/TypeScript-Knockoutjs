@@ -87,6 +87,7 @@ module knockout {
     export function applyBindings(viewModel? , rootNode?: HTMLElement);
     export function toJSON(viewModel, replacer? , space? ): string;
     export function toJS(viewModel): any;
+    export function isObservable(obj): bool;
 
     export var observable: koObservable;
     export var computed: koComputed;
