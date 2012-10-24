@@ -9,6 +9,10 @@ module knockout {
         ();
         extend(options: koExtendOptions);
     }
+    interface koBindingHandlersOptions {
+        init?: (element?, valueAccessor? , allBindingsAccessor? , viewModel? , bindingContext? ) =>void;
+        update?: (element?, valueAccessor? , allBindingsAccessor? , viewModel? , bindingContext? ) =>void;
+    }
     interface koComputedOptions {
         read?: () =>any;
         write?: (value: any) =>void;
@@ -93,8 +97,8 @@ module knockout {
     export var computed: koComputed;
     export var dependentObservable: koComputed;
     export var observableArray: koObservableArray;
-    export var extenders: any;
-    export var bindingHandlers: any;
+    export var extenders: (target: koObservableAny, option?) =>koObservableAny;
+    export var bindingHandlers: koBindingHandlersOptions;
 };
 module knockout.utils {
     export var fieldsIncludedWithJsonPost: any[];
