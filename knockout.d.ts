@@ -120,6 +120,12 @@ module knockout.utils {
     export function toggleDomNodeCssClass(node: HTMLElement, className: string, shouldHaveClass?: bool);
     export function triggerEvent(element: HTMLElement, eventType: string);
     export function unwrapObservable(value);
+    export var domNodeDisposal: {
+            addDisposeCallback(node, callback?: () =>void );
+            removeDisposeCallback(node, callback?: () =>void );
+            cleanNode(node);
+            removeNode(node);
+        }
 }
 
 declare var ko: knockout;
