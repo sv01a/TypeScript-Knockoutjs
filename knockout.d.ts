@@ -29,21 +29,25 @@ module knockout {
     interface koObservableBase extends koExtend {
         valueHasMutated(): void;
         valueWillMutate(): void;
+        peek(): any;
     }
     interface koObservableNumber extends koObservableBase {
         (newValue: number): void;
         (): number;
         subscribe(callback: (newValue: number) => void ): koSubscription;
+        peek(): number;
     }
     interface koObservableString extends koObservableBase {
         (newValue: string): void;
         (): string;
         subscribe(callback: (newValue: string) => void ): koSubscription;
+        peek(): string;
     }
     interface koObservableBool extends koObservableBase {
         (newValue: bool): void;
         (): bool;
         subscribe(callback: (newValue: bool) => void ): koSubscription;
+        peek(): bool;
     }
     interface koObservableAny extends koObservableBase {
         (newValue: any): void;
@@ -60,6 +64,7 @@ module knockout {
         (newValue: any[]): void;
         (): any[];
         subscribe(callback: (newValue: any[]) => void ): koSubscription;
+        peek(): any[];
 
         pop(): any;
         push(...items: any[]): void;
