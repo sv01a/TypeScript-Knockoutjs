@@ -92,6 +92,8 @@ module knockout {
     export function toJSON(viewModel, replacer? , space? ): string;
     export function toJS(viewModel): any;
     export function isObservable(obj): bool;
+    export function isComputed(obj): bool;
+    export function cleanNode(obj);
 
     export var observable: koObservable;
     export var computed: koComputed;
