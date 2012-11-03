@@ -2,6 +2,9 @@ module knockout {
     interface koSubscription {
         dispose();
     }
+    interface koSubscribable {
+        subscribe(callback: (newValue) => void , target? , event?: string): koSubscription;
+    }
     interface koExtendOptions {
         throttle?: number;
     }
@@ -10,23 +13,31 @@ module knockout {
         extend(options: koExtendOptions);
     }
     interface koBindingHandlersOptions {
-        init?: (element?, valueAccessor? , allBindingsAccessor? , viewModel? , bindingContext? ) =>void;
-        update?: (element?, valueAccessor? , allBindingsAccessor? , viewModel? , bindingContext? ) =>void;
+        init?: (element? , valueAccessor? , allBindingsAccessor? , viewModel? , bindingContext? ) =>void;
+        update?: (element? , valueAccessor? , allBindingsAccessor? , viewModel? , bindingContext? ) =>void;
     }
     interface koComputedOptions {
         read?: () =>any;
         write?: (value: any) =>void;
         owner?: any;
     }
-    interface koComputed extends koSubscription {
-        (evaluator: () => any): koExtend;
-        (options: koComputedOptions): koExtend;
-        (): any;
-        subscribe(callback: (newValue: number) => void ): koSubscription;
+    interface koComputedExtOptions extends koComputedOptions {
+        disposeWhenNodeIsRemoved?: () =>any;
+        disposeWhen?: () =>any;
+    }
+    interface koComputedExt extends koExtend {
         getDependenciesCount(): number;
         hasWriteFunction(): bool;
+        subscribe(callback: (newValue) => void , target? , event?: string): koSubscription;
+        dispose();
+    }
+    interface koComputed {
+        (evaluator: () => any, target? , options?: koComputedExtOptions): koComputedExt;
+        (initOptions: koComputedOptions, target? , options?: koComputedExtOptions): koComputedExt;
+        (): any;
+        peek(): any;
     };
-    interface koObservableBase extends koExtend {
+    interface koObservableBase extends koExtend extends koSubscribable {
         valueHasMutated(): void;
         valueWillMutate(): void;
         peek(): any;
@@ -34,25 +45,24 @@ module knockout {
     interface koObservableNumber extends koObservableBase {
         (newValue: number): void;
         (): number;
-        subscribe(callback: (newValue: number) => void ): koSubscription;
+        subscribe(callback: (newValue: number) => void , target? , event?: string): koSubscription;
         peek(): number;
     }
     interface koObservableString extends koObservableBase {
         (newValue: string): void;
         (): string;
-        subscribe(callback: (newValue: string) => void ): koSubscription;
+        subscribe(callback: (newValue: string) => void , target? , event?: string): koSubscription;
         peek(): string;
     }
     interface koObservableBool extends koObservableBase {
         (newValue: bool): void;
         (): bool;
-        subscribe(callback: (newValue: bool) => void ): koSubscription;
+        subscribe(callback: (newValue: bool) => void , target? , event?: string): koSubscription;
         peek(): bool;
     }
     interface koObservableAny extends koObservableBase {
         (newValue: any): void;
         (): any;
-        subscribe(callback: (newValue: any) => void ): koSubscription;
     }
     interface koObservable {
         (value: number): koObservableNumber;
@@ -104,7 +114,7 @@ module knockout {
     export var computed: koComputed;
     export var dependentObservable: koComputed;
     export var observableArray: koObservableArray;
-    export var extenders: (target: koObservableAny, option?) =>koObservableAny;
+    export var extenders: (target: koObservableAny, option? ) =>koObservableAny;
     export var bindingHandlers: koBindingHandlersOptions;
 };
 module knockout.utils {
@@ -128,11 +138,11 @@ module knockout.utils {
     export function triggerEvent(element: HTMLElement, eventType: string);
     export function unwrapObservable(value);
     export var domNodeDisposal: {
-            addDisposeCallback(node, callback?: () =>void );
-            removeDisposeCallback(node, callback?: () =>void );
-            cleanNode(node);
-            removeNode(node);
-        }
-}
+        addDisposeCallback(node, callback?: () =>void );
+        removeDisposeCallback(node, callback?: () =>void );
+        cleanNode(node);
+        removeNode(node);
+    }
+    }
 
 declare var ko: knockout;
