@@ -32,16 +32,9 @@ ko.extenders['logChange'] = (target, option)=>{
     return target;
 };
 
-ko.bindingHandlers.hasFocus = {
+ko.bindingHandlers['hasFocus'] = {
     init: (element, valueAccessor)=>{
-        $(element).focus(function() {
-            var value = valueAccessor();
-            value(true);
-        });
-        $(element).blur(function() {
-            var value = valueAccessor();
-            value(false);
-        });           
+                   
     },
     update: function(element, valueAccessor) {
         var value = valueAccessor();
